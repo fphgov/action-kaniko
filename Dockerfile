@@ -2,7 +2,8 @@ FROM alpine as builder
 
 RUN apk --update add ca-certificates
 
-RUN wget -O /kaniko/jq \
+RUN mkdir /kaniko && \
+    wget -O /kaniko/jq \
     https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 && \
     chmod +x /kaniko/jq && \
     wget -O /kaniko/reg \
