@@ -2,7 +2,7 @@ FROM alpine as certs
 
 RUN apk --update add ca-certificates
 
-FROM alpine as builder
+FROM busybox as builder
 
 SHELL ["/busybox/sh", "-c"]
 
