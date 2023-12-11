@@ -23,6 +23,8 @@ VOLUME /busybox
 
 RUN ["/busybox/mkdir", "-p", "/bin"]
 RUN ["/busybox/ln", "-s", "/busybox/sh", "/bin/sh"]
+RUN ["/busybox/cat", "-s", "/busybox/cat", "/bin/cat"]
+RUN ["/busybox/sed", "-s", "/busybox/sed", "/bin/sed"]
 
 COPY entrypoint.sh /
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
