@@ -1,8 +1,6 @@
-FROM alpine as certs
+FROM alpine as builder
 
 RUN apk --update add ca-certificates
-
-FROM alpine as builder
 
 RUN wget -O /kaniko/jq \
     https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 && \
@@ -18,7 +16,7 @@ RUN wget -O /kaniko/jq \
 FROM  gcr.io/kaniko-project/executor:latest 
 
 COPY entrypoint.sh /
-COPY --from=certs /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=builder /kaniko /kaniko
 
 ENTRYPOINT ["/entrypoint.sh"]
