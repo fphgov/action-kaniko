@@ -2,9 +2,7 @@ FROM alpine as certs
 
 RUN apk --update add ca-certificates
 
-FROM busybox as builder
-
-SHELL ["/busybox/sh", "-c"]
+FROM alpine as builder
 
 RUN wget -O /kaniko/jq \
     https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 && \
