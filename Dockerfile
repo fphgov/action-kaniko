@@ -14,17 +14,7 @@ RUN mkdir /kaniko && \
     tar -xvzf /crane.tar.gz crane -C /kaniko && \
     rm /crane.tar.gz
 
-FROM busybox:musl AS busybox
-
-FROM  gcr.io/kaniko-project/executor:latest 
-
-COPY --from=busybox /bin /busybox
-VOLUME /busybox
-
-RUN ["/busybox/mkdir", "-p", "/bin"]
-RUN ["/busybox/ln", "-s", "/busybox/sh", "/bin/sh"]
-RUN ["/busybox/ln", "-s", "/busybox/cat", "/bin/cat"]
-RUN ["/busybox/ln", "-s", "/busybox/sed", "/bin/sed"]
+FROM  gcr.io/kaniko-project/executor:v1.9.1-debug
 
 COPY entrypoint.sh /
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
