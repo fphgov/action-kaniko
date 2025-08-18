@@ -1,4 +1,4 @@
-FROM harbor.budapest.hu/docker-hub/alpine as builder
+FROM alpine as builder
 
 RUN apk --update add ca-certificates
 
