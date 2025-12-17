@@ -1,4 +1,6 @@
-FROM alpine as builder
+ARG REPOSITORY=""
+
+FROM ${REPOSITORY}alpine as builder
 
 RUN apk --update add ca-certificates
 
