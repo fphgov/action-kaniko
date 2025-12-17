@@ -20,7 +20,8 @@ RUN wget -O /kaniko/jq \
     rm /crane.tar.gz
 
 COPY entrypoint.sh /
-COPY --from=certs /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+COPY --from=builder /kaniko /kaniko
 
 ENTRYPOINT ["/entrypoint.sh"]
 
