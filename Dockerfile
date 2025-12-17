@@ -2,8 +2,6 @@ FROM alpine as builder
 
 RUN apk --update add ca-certificates
 
-FROM gcr.io/kaniko-project/executor:v1.24.0-debug
-
 RUN mkdir /kaniko && \
     wget -O /kaniko/jq \
     https://github.com/jqlang/jq/releases/download/jq-1.8.1/jq-linux64 && \
@@ -15,6 +13,8 @@ RUN mkdir /kaniko && \
     https://github.com/google/go-containerregistry/releases/download/v0.17.0/go-containerregistry_Linux_x86_64.tar.gz && \
     tar -xvzf /crane.tar.gz crane -C /kaniko && \
     rm /crane.tar.gz
+
+FROM gcr.io/kaniko-project/executor:v1.24.0-debug
 
 COPY entrypoint.sh /
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
