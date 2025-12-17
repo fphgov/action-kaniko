@@ -1,14 +1,11 @@
-ARG REPOSITORY=""
-
-FROM ${REPOSITORY}alpine as builder
+FROM alpine as builder
 
 RUN apk --update add ca-certificates
 
 FROM gcr.io/kaniko-project/executor:v1.24.0-debug
 
-SHELL ["/busybox/sh", "-c"]
-
-RUN wget -O /kaniko/jq \
+RUN mkdir /kaniko && \
+    wget -O /kaniko/jq \
     https://github.com/jqlang/jq/releases/download/jq-1.8.1/jq-linux64 && \
     chmod +x /kaniko/jq && \
     wget -O /kaniko/reg \
