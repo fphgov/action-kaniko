@@ -4,7 +4,7 @@ RUN apk --update add ca-certificates
 
 RUN mkdir /kaniko && \
     wget -O /kaniko/jq \
-    https://github.com/jqlang/jq/releases/download/jq-1.8.1/jq-linux64 && \
+    https://github.com/jqlang/jq/releases/download/jq-1.6/jq-linux64 && \
     chmod +x /kaniko/jq && \
     wget -O /kaniko/reg \
     https://github.com/genuinetools/reg/releases/download/v0.16.1/reg-linux-386 && \
